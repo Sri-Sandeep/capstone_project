@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <h1>Dashboard</h1>
+            <button id="logout">Logout</button>
+        </div>
+    </header>
+
+    <section id="admin-section" style="display: none;">
+        <h2>Admin Controls</h2>
+        <form id="add-hall-form">
+            <label for="hall-name">Hall Name:</label>
+            <input type="text" id="hall-name" placeholder="Enter hall name" required>
+            <label for="capacity">Capacity:</label>
+            <input type="number" id="capacity" placeholder="Enter capacity" required>
+            <label for="price">Price:</label>
+            <input type="number" id="price" step="0.01" placeholder="Enter price" required>
+            <button type="submit">Add Hall</button>
+        </form>
+        <div id="hall-list-admin"></div>
+    </section>
+
+    <section id="user-section" style="display: none;">
+        <h2>Available Halls</h2>
+        <div id="hall-list-user"></div>
+        
+        <h2>Book a Hall</h2>
+        <form id="book-hall-form">
+            <label for="hall-id">Hall ID:</label>
+            <input type="number" id="hall-id" placeholder="Enter hall ID" required>
+            <label for="booking-date">Booking Date:</label>
+            <input type="datetime-local" id="booking-date" required>
+            <button type="submit">Book Now</button>
+        </form>
+        <p id="booking-status"></p>
+        
+        <h2>My Bookings</h2>
+        <div id="my-bookings"></div>
+        
+        <h2>Add Review</h2>
+        <form id="review-form">
+            <label for="review-hall-id">Hall ID:</label>
+            <input type="number" id="review-hall-id" placeholder="Enter hall ID" required>
+            <label for="rating">Rating (1-5):</label>
+            <input type="number" id="rating" min="1" max="5" placeholder="Enter rating" required>
+            <label for="comment">Comment:</label>
+            <textarea id="comment" placeholder="Share your experience..."></textarea>
+            <button type="submit">Submit Review</button>
+        </form>
+        <p id="review-status"></p>
+    </section>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>

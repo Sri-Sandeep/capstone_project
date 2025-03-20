@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marriage Hall Booking - Login</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Marriage Hall Booking System</h1>
+    </header>
+    
+    <section>
+        <div id="login-form">
+            <h2>Login</h2>
+            <form id="login">
+                <label for="username">Username:</label>
+                <input type="text" id="username" placeholder="Enter your username" required>
+                <label for="password">Password:</label>
+                <input type="password" id="password" placeholder="Enter your password" required>
+                <button type="submit">Login</button>
+            </form>
+            <p>Not registered? <a href="#" id="show-register">Register here</a></p>
+            <p id="login-status"></p>
+        </div>
+
+        <div id="register-form" style="display: none;">
+            <h2>Register</h2>
+            <form id="register">
+                <label for="reg-username">Username:</label>
+                <input type="text" id="reg-username" placeholder="Choose a username" required>
+                <label for="reg-password">Password:</label>
+                <input type="password" id="reg-password" placeholder="Create a password" required>
+                <button type="submit">Register</button>
+            </form>
+            <p id="register-status"></p>
+        </div>
+
+        <!-- Section for Available Halls -->
+        <div id="available-halls">
+            <h2>Available Halls</h2>
+            <div id="hall-list"></div>
+        </div>
+    </section>
+
+    <script src="app.js"></script>
+
+    <!-- Inline Script to Fetch Halls -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            fetch('http://localhost:5000/halls')
+                .then(response => response.json())
+                .then(data => {
+                    const hallList = document.getElementById('hall-list');
+                    hallList.innerHTML = ''; // Clear existing content
+                    data.forEach(hall => {
+                        const div = document.createElement('div');
+                        div.className = 'hall';
+                        div.innerHTML = `
+                            <h3>${hall.name}</h3>
+                            <p>Capacity: ${hall.capacity}</p>
+                            <p>Price: ₹${hall.price}</p>
+                            <p>ID: ${hall.id}</p>
+                        `;
+                        hallList.appendChild(div);
+                    });
+                })
+                .catch(() => {
+                    const hallList = document.getElementById('hall-list');
+                    hallList.innerHTML = '<p>Unable to load available halls at this time.</p>';
+                });
+        });
+    </script>
+</body>
+</html>
