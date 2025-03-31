@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+    environment:
+      - SQLALCHEMY_DATABASE_URI=mysql+pymysql://root:Sandy@db/marriage_hall_db
+    volumes:
+      - ./marriage_hall_booking/backend:/app
+
+  db:
+    image: mysql:8.0
+    container_name: mysql_container
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: Sandy
+      MYSQL_DATABASE: marriage_hall_db
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
+
